@@ -36,6 +36,7 @@ function parseFrontmatter(raw){
   }
   return {meta,body:raw.slice(m[0].length)};
 }
+
 function fallbackMeta(folder, raw, type){
   const {meta,body}=parseFrontmatter(raw);
   const h=body.match(/^#\s+(.+)$/m)?.[1]?.trim();
@@ -46,6 +47,7 @@ function fallbackMeta(folder, raw, type){
   const stat=fs.statSync(path.join(CONTENT,type,folder));
   return {meta,body,title,description,tags,date:meta.date||stat.mtime.toISOString().slice(0,10),snippet:firstP.slice(0,260)};
 }
+
 function listContent(type){
   const root=path.join(CONTENT,type); if(!fs.existsSync(root)) return [];
   return fs.readdirSync(root,{withFileTypes:true}).filter(x=>x.isDirectory()).map(dir=>{
@@ -68,7 +70,9 @@ function listContent(type){
     };
   }).sort((a,b)=>String(b.date).localeCompare(String(a.date)));
 }
+
 function esc(s){return String(s??"").replace(/[&<>"']/g,c=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#039;"}[c]));}
+
 function mdToHtml(md){
   const {body}=parseFrontmatter(md);
   let s=esc(body).replace(/^### (.+)$/gm,"<h3>$1</h3>").replace(/^## (.+)$/gm,"<h2>$1</h2>").replace(/^# (.+)$/gm,"<h1>$1</h1>")
@@ -77,6 +81,7 @@ function mdToHtml(md){
   s=s.replace(/(<li>.*?<\/li>)/gs,"<ul>$1</ul>");
   return `<p>${s}</p>`;
 }
+
 function detailPage(item,type,raw){
   const title=esc(item.title), desc=esc(item.description);
   const canonical=(SITE_ORIGIN||"")+`${BASE}/${item.url}`.replace(/\/{2,}/g,"/");
@@ -86,12 +91,21 @@ function detailPage(item,type,raw){
 }
 
 clean(DIST); ensure(DIST); copyDir(SITE,DIST);
+
+// Fallback: Create 404.html from index.html if index.html exists in dist after copying site
+const mainIndex = path.join(DIST, "index.html");
+const fallback404 = path.join(DIST, "404.html");
+if (fs.existsSync(mainIndex)) {
+  fs.copyFileSync(mainIndex, fallback404);
+}
+
 for(const t of ["projects","blogs"]){ const items=listContent(t); for(const item of items){
   const folder=path.join(CONTENT,t,item.slug); const md=fs.readdirSync(folder).find(x=>/\.md$/i.test(x)); if(!md) continue;
   const out=path.join(DIST,t,item.slug,"index.html"); ensure(path.dirname(out));
   fs.writeFileSync(out,detailPage(item,t,read(path.join(folder,md))));
   for(const f of fs.readdirSync(folder)){ if(f!==md){ const s=path.join(folder,f); if(fs.statSync(s).isFile()) fs.copyFileSync(s,path.join(DIST,t,item.slug,f));}}
 }}
+
 const projects=listContent("projects"), blogs=listContent("blogs");
 const media=[];
 function collectMedia(dir, rel=""){
@@ -106,6 +120,7 @@ collectMedia(path.join(ROOT,"assets"),"assets");
 collectMedia(path.join(CONTENT),"content");
 ensure(path.join(DIST,"assets"));
 fs.writeFileSync(path.join(DIST,"assets","content.js"),`window.LAB_CONTENT=${JSON.stringify({projects,blogs,media,site:{base:BASE}})};`);
+
 const origin=SITE_ORIGIN || (process.env.GITHUB_REPOSITORY?`https://${process.env.GITHUB_REPOSITORY.split("/")[0]}.github.io`:"");
 const siteUrl=`${origin}${BASE}/`.replace(/\/+/g,"/").replace("https:/","https://");
 const urls=["",...projects.map(x=>x.url),...blogs.map(x=>x.url)];
@@ -114,25 +129,37 @@ fs.writeFileSync(path.join(DIST,"sitemap.xml"),sitemap);
 fs.writeFileSync(path.join(DIST,"robots.txt"),`User-agent: *\nAllow: /\nSitemap: ${siteUrl}sitemap.xml\n`);
 fs.writeFileSync(path.join(DIST,"feed.xml"),`<?xml version="1.0" encoding="UTF-8"?><rss version="2.0"><channel><title>Obaid's Laboratory</title><link>${esc(siteUrl)}</link><description>Projects and blogs by Mohammed Obaidul Hoque</description>${[...blogs,...projects].slice(0,20).map(x=>`<item><title>${esc(x.title)}</title><link>${esc(siteUrl+x.url)}</link><description>${esc(x.description)}</description><pubDate>${new Date(x.date).toUTCString()}</pubDate></item>`).join("")}</channel></rss>`);
 
-
 function validateOutput(){
-  const required=["index.html","assets/app.css","assets/app.js","assets/content.js","sitemap.xml","robots.txt","feed.xml"];
+  const required=["index.html","404.html","assets/app.css","assets/app.js","assets/content.js","sitemap.xml","robots.txt","feed.xml"];
   const missing=required.filter(x=>!fs.existsSync(path.join(DIST,x)));
   if(missing.length) throw new Error(`Missing: ${missing.join(", ")}`);
+  
   const htmlFiles=[];
   const walk=(dir)=>{
     for(const d of fs.readdirSync(dir,{withFileTypes:true})){
       const f=path.join(dir,d.name); if(d.isDirectory()) walk(f); else if(/\.html$/i.test(d.name)) htmlFiles.push(f);
     }
   }; walk(DIST);
+
   const broken=new Set();
   for(const f of htmlFiles){
     const raw=read(f);
     for(const m of raw.matchAll(/(?:href|src)="([^"]+)"/g)){
-      let u=m[1]; if(!u || /^(https?:|mailto:|tel:|#|data:|javascript:)/i.test(u)) continue;
-      u=u.split("#")[0].split("?")[0];
+      let u=m[1]; 
+      if(!u || /^(https?:|mailto:|tel:|#|data:|javascript:)/i.test(u)) continue;
+      
+      let cleanU = u;
+      if (BASE && cleanU.startsWith(BASE)) {
+        cleanU = cleanU.slice(BASE.length);
+      }
+      cleanU = cleanU.split("#")[0].split("?")[0].replace(/^\/+/,"");
+      
       const target=path.join(path.dirname(f),u);
-      if(!fs.existsSync(target) && !fs.existsSync(path.join(DIST,u.replace(/^\/+/,"")))) broken.add(`${path.relative(DIST,f)} -> ${u}`);
+      const distTarget=path.join(DIST, cleanU);
+
+      if(!fs.existsSync(target) && !fs.existsSync(distTarget)) {
+        broken.add(`${path.relative(DIST,f)} -> ${u}`);
+      }
     }
   }
   if(broken.size) throw new Error(`Broken local references:\n${[...broken].join("\n")}`);
