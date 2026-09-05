@@ -1,0 +1,189 @@
+<!doctype html>
+<html lang="bn">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="theme-color" content="#08110f">
+  <meta name="description" content="Obaid's Laboratory — Mohammed Obaidul Hoque, Web Development Mentor and Full Stack Web Developer.">
+  <meta name="robots" content="index,follow,max-image-preview:large">
+  <link rel="icon" href="assets/favicon.svg" type="image/svg+xml">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Noto+Sans+Bengali:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="assets/app.css">
+  <title>Obaid's Laboratory — Think differently build smartly</title>
+</head>
+<body>
+  <a class="skip-link" href="#main">মূল কনটেন্টে যান</a>
+  <div id="loader" class="loader" aria-hidden="true">
+    <div class="loader-grid"></div>
+    <div class="loader-core">
+      <div id="loaderThought" class="loader-thought">মনের ভেতর কী চলছে?</div>
+      <div class="loader-ring"></div>
+      <div class="loader-code" id="loaderCode">INIT / 00%</div>
+    </div>
+  </div>
+
+  <header class="nav-shell">
+    <nav class="nav" aria-label="প্রধান নেভিগেশন">
+      <a class="brand" href="#home" aria-label="Obaid's Laboratory">
+        <span class="brand-mark">O</span>
+        <span><strong>Obaid's</strong><small>Laboratory</small></span>
+      </a>
+      <button class="nav-toggle" aria-expanded="false" aria-controls="navLinks">☰</button>
+      <div class="nav-links" id="navLinks">
+        <a href="#home">Home</a>
+        <a href="#about">About</a>
+        <a href="#projects">Projects</a>
+        <a href="#blogs">Blog</a>
+        <a href="#contact">Contact</a>
+        <button id="themeToggle" class="icon-btn" type="button" aria-label="থিম পরিবর্তন">◐</button>
+        <button id="soundToggle" class="icon-btn" type="button" aria-label="অ্যাম্বিয়েন্ট সাউন্ড">♪</button>
+      </div>
+    </nav>
+  </header>
+
+  <main id="main">
+    <section id="home" class="hero section">
+      <div class="hero-noise"></div>
+      <div class="hero-orbit orbit-a"></div>
+      <div class="hero-orbit orbit-b"></div>
+      <div class="hero-copy">
+        <p class="eyebrow">WEB DEVELOPMENT MENTOR × FULL STACK</p>
+        <h1>আমি <span class="text-scramble" data-scramble="Mohammed Obaidul Hoque">Mohammed Obaidul Hoque</span>।</h1>
+        <p class="hero-role">আমি জটিল সমস্যাকে পরিষ্কার, ব্যবহারযোগ্য এবং স্মার্ট web experience-এ রূপ দিই।</p>
+        <div class="hero-actions">
+          <a class="btn btn-primary magnetic" href="#projects">আমার কাজ দেখুন <span>↗</span></a>
+          <a class="btn btn-ghost magnetic" href="#contact">আমার সাথে connect করুন</a>
+        </div>
+        <div class="hero-signals" aria-label="দ্রুত তথ্য">
+          <div><span>01</span><strong>Think</strong><small>problem first</small></div>
+          <div><span>02</span><strong>Build</strong><small>clean systems</small></div>
+          <div><span>03</span><strong>Refine</strong><small>user experience</small></div>
+        </div>
+      </div>
+      <div class="hero-lab">
+        <div class="lab-stage" id="portraitStage" tabindex="0" aria-label="লুকানো portrait আবিষ্কার করুন">
+          <div class="lab-crosshair"></div>
+          <div class="lab-orbit-ring ring-1"></div>
+          <div class="lab-orbit-ring ring-2"></div>
+          <div class="lab-core"><span>∞</span></div>
+          <div class="portrait-secret" id="portraitSecret">
+            <img src="assets/portrait.webp" alt="Mohammed Obaidul Hoque-এর ছবি" loading="lazy" onerror="this.style.display='none'">
+            <span class="portrait-fallback">PORTRAIT<br>NOT YET LOADED</span>
+          </div>
+          <p class="lab-hint" id="labHint">কিছু খুঁজছেন?</p>
+        </div>
+      </div>
+      <div class="scroll-cue">SCROLL <span>↓</span></div>
+    </section>
+
+    <section id="about" class="section section-dark reveal-section">
+      <div class="section-head">
+        <p class="eyebrow">ABOUT / OBSERVATION</p>
+        <h2>মানুষ আগে। প্রযুক্তি পরে।</h2>
+      </div>
+      <div class="about-grid">
+        <article class="manifesto card">
+          <span class="card-index">01</span>
+          <p>“আমি আমার web development students-কে differently think করতে শেখাই এবং সবসময় user experience-কে priority দিই।”</p>
+        </article>
+        <div class="about-copy">
+          <p>আমি <strong>Web Development Mentor</strong> এবং <strong>Full Stack Web Developer</strong>। আমার কাজ শুধু interface বানানো নয়। একটি সমস্যা কীভাবে মানুষ অনুভব করে, কোথায় আটকে যায়, কোন মুহূর্তে trust তৈরি হয়, তারপর সেই insight-কে কীভাবে বাস্তব software-এ রূপ দেওয়া যায়, সেটিই আমার আগ্রহ।</p>
+          <div class="fact-grid">
+            <div><span>LAB</span><strong>Obaid's Laboratory</strong></div>
+            <div><span>FOCUS</span><strong>UX + Engineering</strong></div>
+            <div><span>APPROACH</span><strong>Think → Build → Refine</strong></div>
+            <div><span>EMAIL</span><strong>obaidulhoquectg@outlook.com</strong></div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section id="projects" class="section construction reveal-section">
+      <div class="construction-line"></div>
+      <div class="section-head">
+        <p class="eyebrow">PROJECTS / UNDER CONSTRUCTION</p>
+        <h2>যেসব system আমি বানিয়েছি, সেগুলো এখানে evidence হিসেবে আছে।</h2>
+        <p class="section-sub">Search করুন, filter করুন, explore করুন। প্রতিটি card build-time generated.</p>
+      </div>
+      <div class="toolbar">
+        <label class="search-box"><span>⌕</span><input id="projectSearch" type="search" placeholder="Project খুঁজুন..." autocomplete="off"></label>
+        <div class="filter-row" id="projectFilters"></div>
+      </div>
+      <div class="content-grid" id="projectsGrid" data-content-grid></div>
+      <div class="empty-state" id="projectsEmpty" hidden>এই filter-এ কিছু পাওয়া যায়নি। সিস্টেমটি অন্তত মিথ্যা project বানাচ্ছে না।</div>
+      <button class="btn btn-ghost center-btn" id="projectsMore" hidden>সব Projects দেখুন</button>
+    </section>
+
+    <section id="blogs" class="section broadcast reveal-section">
+      <div class="broadcast-backdrop"></div>
+      <div class="section-head">
+        <p class="eyebrow">BLOG / SIGNAL BROADCAST</p>
+        <h2>চিন্তা থেকে system। system থেকে lesson।</h2>
+        <p class="section-sub">Search ও tag filter দিয়ে লেখা খুঁজে নিন।</p>
+      </div>
+      <div class="toolbar">
+        <label class="search-box"><span>⌕</span><input id="blogSearch" type="search" placeholder="Blog খুঁজুন..." autocomplete="off"></label>
+        <div class="filter-row" id="blogFilters"></div>
+      </div>
+      <div class="content-grid blog-grid" id="blogsGrid" data-content-grid></div>
+      <div class="empty-state" id="blogsEmpty" hidden>এখানে matching article নেই।</div>
+    </section>
+
+    <section id="contact" class="section contact reveal-section">
+      <div class="contact-pulse"></div>
+      <div class="section-head">
+        <p class="eyebrow">CONTACT / CONNECTION</p>
+        <h2>একটা ভালো problem থাকলে, কথাটা শুরু করা যাক।</h2>
+        <p class="section-sub">প্রয়োজনীয় contact detail-গুলো config থেকে আসে। যা যোগ করা নেই, তা interface-এও দেখাবে না। সভ্যতা আপাতত এতটুকু automated.</p>
+      </div>
+      <div class="contact-grid">
+        <div class="contact-card primary-card">
+          <span class="card-index">CONNECT</span>
+          <h3 id="contactHeadline">Let’s build something useful.</h3>
+          <p id="contactCopy">আপনার problem, idea বা project-এর context পাঠান।</p>
+          <div class="contact-actions" id="contactActions"></div>
+        </div>
+        <div class="connection-map" aria-hidden="true">
+          <div class="node node-a"></div><div class="node node-b"></div><div class="node node-c"></div>
+          <div class="wire wire-a"></div><div class="wire wire-b"></div><div class="wire wire-c"></div>
+          <div class="map-core">∞</div>
+        </div>
+      </div>
+    </section>
+
+    <section class="section endnote reveal-section">
+      <div class="infinite-sentence" id="infiniteSentence">এটাই শেষ নয় · explore · discover · return · learn · build · </div>
+      <div class="endnote-main">
+        <p class="eyebrow">LAB NOTE 07</p>
+        <h2>আপনি যা দেখেছেন, সেটাই সব নয়।</h2>
+        <p>আরও content যোগ হবে নির্দিষ্ট folder-এ। Build system সেটা discover করে index করবে। মানুষের কাজ মানুষের হাতে থাক, repetitive কাজটা automation-এর হাতে যাক।</p>
+        <a class="text-link" href="#home">উপরে ফিরে যান ↑</a>
+      </div>
+    </section>
+  </main>
+
+  <aside class="ai-dock" aria-label="Laboratory Assistant">
+    <button id="aiLauncher" class="ai-launcher" aria-expanded="false" aria-controls="aiPanel">
+      <span class="ai-orbit">∞</span><span class="ai-label">Lab Assistant</span>
+    </button>
+    <div id="aiPanel" class="ai-panel" hidden>
+      <div class="ai-head"><div><strong>Laboratory Assistant</strong><small>site search + assistant</small></div><button id="aiClose" class="icon-btn" aria-label="বন্ধ করুন">×</button></div>
+      <div id="aiMessages" class="ai-messages"><div class="ai-msg ai">হ্যালো। আমার কাছে এই site-এর projects, blogs এবং প্রকাশিত তথ্যের index আছে। কী জানতে চান?</div></div>
+      <form id="aiForm" class="ai-form"><input id="aiInput" autocomplete="off" placeholder="যেমন: আমার GitHub কী?" aria-label="Assistant-কে প্রশ্ন"><button type="submit">Send</button></form>
+      <div class="ai-suggestions"><button type="button" data-ai-q="আমার সম্পর্কে বলুন">About</button><button type="button" data-ai-q="আমার projects দেখান">Projects</button><button type="button" data-ai-q="Contact information দিন">Contact</button></div>
+    </div>
+  </aside>
+
+  <footer class="footer">
+    <div><strong>Obaid's Laboratory</strong><span>Think differently build smartly</span></div>
+    <div>© <span id="year"></span> Mohammed Obaidul Hoque · Web Development Mentor and Full Stack Web Developer</div>
+    <a href="#home">∞</a>
+  </footer>
+
+  <script src="config.js"></script>
+  <script src="assets/content.js"></script>
+  <script src="assets/app.js" defer></script>
+</body>
+</html>

@@ -1,0 +1,12 @@
+{
+  "name": "obaids-laboratory",
+  "private": true,
+  "version": "1.0.0",
+  "type": "module",
+  "scripts": {
+    "build": "node scripts/build.mjs",
+    "serve": "npx serve dist",
+    "validate": "node scripts/build.mjs --validate-only"
+  },
+  "devDependencies": {}
+}
