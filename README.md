@@ -73,4 +73,4 @@ in `site/config.js`.
 
 The AI assistant is optional and safely falls back to local search when no endpoint exists.
 
-The public chat proxy now requires server-side UPSTASH_REDIS_REST_URL and UPSTASH_REDIS_REST_TOKEN settings. It fails closed if the limiter is unavailable, allows at most 12 requests per client IP per minute, caps messages at 2,000 characters, and limits each AI response to 400 tokens. Store the Upstash values in the serverless host settings, never in site/config.js. See the [Upstash REST API guide](https://upstash.com/docs/redis/features/restapi).
+The public chat proxy now requires server-side UPSTASH_REDIS_REST_URL and UPSTASH_REDIS_REST_TOKEN settings. It fails closed if the limiter is unavailable, allows at most 12 requests per client IP per minute, caps messages at 2,000 characters, and limits each AI response to 400 completion tokens. Store the Upstash values in the serverless host settings, never in site/config.js. See the [Upstash REST API guide](https://upstash.com/docs/redis/features/restapi).
