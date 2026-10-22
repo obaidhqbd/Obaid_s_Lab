@@ -13,9 +13,9 @@ function records(value, limit) {
   if (!Array.isArray(value)) return [];
   return value.slice(0, limit).map((item) => ({
     title: text(item?.title, 160),
-    description: text(item?.description, 500),
+    description: text(item?.description, 250),
     tags: Array.isArray(item?.tags) ? item.tags.slice(0, 10).map((tag) => text(tag, 80)).filter(Boolean) : [],
-    url: text(item?.url, 500)
+    url: text(item?.url, 300)
   }));
 }
 
@@ -25,10 +25,10 @@ function publicContext(context) {
     role: text(context?.role, 120),
     email: text(context?.email, 200),
     github: text(context?.github, 300),
-    projects: records(context?.projects, 20),
-    blogs: records(context?.blogs, 20),
+    projects: records(context?.projects, 5),
+    blogs: records(context?.blogs, 5),
     media: Array.isArray(context?.media)
-      ? context.media.slice(0, 30).map((item) => text(item, 500)).filter(Boolean)
+      ? context.media.slice(0, 10).map((item) => text(item, 300)).filter(Boolean)
       : []
   };
 }
@@ -108,7 +108,7 @@ export default async function handler(req, res) {
       body: JSON.stringify({
         model: process.env.OPENROUTER_MODEL || "openai/gpt-4o-mini",
         temperature: 0.25,
-        max_tokens: 400,
+        max_completion_tokens: 400,
         messages: [
           {
             role: "system",
